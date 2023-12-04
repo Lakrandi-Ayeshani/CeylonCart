@@ -1,62 +1,104 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../store/store';
+import { ITemCartValues, ItemValues } from '../../types/type';
+import CartItem from '../../components/CartItemCard';
 
 interface ItemState {
     // value: number
-    items: Array<{ name: string; description: string; }>
+    items: Array<ItemValues>
+    cartItems: Array<ItemValues>
+    // cartItems: Array<{item: ItemValues, quantity?: number }>
+    // quantity: number
+    // cartItems: Array<ItemValues & ITemCartValues>
 }
 
 const initialState: ItemState = {
     // value: 0,
     items: [
         {
+            id: 1,
             name: 'item 1',
             description: 'description 1',
+            price: 100,
+            imgURL: 'https://picsum.photos/250',
+            orderQuantity: 0,
         },
         {
+            id: 2,
             name: 'item 2',
             description: 'description 2',
+            price: 100,
+            imgURL: 'https://picsum.photos/249',
+            orderQuantity: 0,
         },
         {
+            id: 3,
             name: 'item 3',
             description: 'description 3',
+            price: 100,
+            imgURL: 'https://picsum.photos/248',
+            orderQuantity: 0,
         },
         {
+            id: 4,
             name: 'item 4',
             description: 'description 4',
+            price: 100,
+            imgURL: 'https://picsum.photos/247',
+            orderQuantity: 0,
         },
         {
+            id: 5,
             name: 'item 5',
             description: 'description 5',
+            price: 100,
+            imgURL: 'https://picsum.photos/246',
+            orderQuantity: 0,
         },
         {
+            id: 6,
             name: 'item 6',
             description: 'description 6',
+            price: 100,
+            imgURL: 'https://picsum.photos/245',
+            orderQuantity: 0,
         },
         {
+            id: 7,
             name: 'item 7',
             description: 'description 7',
+            price: 100,
+            imgURL: 'https://picsum.photos/244',
+            orderQuantity: 0,
         },
-    ]
+    ],
+    cartItems: [],
+
 }
 
 export const itemSlice = createSlice({
     name: 'item',
     initialState, 
     reducers: {
-        // increment: (state) => {
-        //     state.value += 1
-
-        // },
-        // decrement: (state) => {
-        //     state.value -= 1
-        // },
+        addToCart: (state, {payload}) => {
+            let changeItem = state.items.find(item => item.id === payload.id);
+            if (changeItem) {
+                changeItem = { ...changeItem };
+                changeItem.orderQuantity = 1;
+                state.cartItems.push(changeItem);
+            }
+        },
+        quantityIncrement: (state, {payload}) => {
+            state.cartItems[payload].orderQuantity += 1;
+        },
+        quantityDecrement: (state, {payload}) => {
+            state.cartItems[payload].orderQuantity -= 1;
+        },
 
     },
 })
 
-// export const { increment, decrement } = itemSlice.actions
+export const { addToCart, quantityDecrement, quantityIncrement } = itemSlice.actions
 
 export const selectItem = (state: RootState) => state.item.items
 
