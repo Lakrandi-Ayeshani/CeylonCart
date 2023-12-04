@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+* {
+  --slate-100: rgb(241 245 249);
+  --slate-300: rgb(203 213 225);
+  --slate-500: rgb(100 116 139);
+  --slate-600: rgb(71 85 105);
+  --slate-700: rgb(51 65 85);
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cart-nav {
+  width: 200px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.quantity-button {
+  /* position: absolute;
+  top: 75%;
+  left: 71%; */
+  /* transform: 'translate(-50%, -50%)', */
+  /* width: 25px;
+  border: none; */
+  cursor: pointer;
+  /* border-radius: 100%; */
+  /* background: var(--slate-100); */
+  color: var(--slate-700);
+  /* border: 1px solid var(--slate-300); */
+  /* font-size: 1cap; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.cart-card {
+  border: 3px solid transparent;
+  border-radius: 5%;
+  padding: 5px;
+  width: 150px;
+  height: 150px;
+  justify-self: center;
 }
 
-.App-link {
-  color: #61dafb;
+.card {
+  border: 3px solid transparent;
+  border-radius: 5%;
+  padding: 5px;
+  width: 290px;
+  height: 350px;
+  justify-self: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card:hover {
+  border: 3px solid var(--slate-100);
+
+}
+
+.cart-button {
+  position: absolute;
+  top: 75%;
+  left: 71%;
+  /* transform: 'translate(-50%, -50%)', */
+  border: none;
+  cursor: pointer;
+  border-radius: 100%;
+  background: var(--slate-100);
+  color: var(--slate-700);
+  border: 1px solid var(--slate-300);
+  font-size: 2cap;
+}
+
+.cart-button:hover {
+  background: var(--slate-700);
+  color: var(--slate-100);
+  border: 1px solid var(--slate-600);
+}
+
+/* TEXT */
+
+.name-text {
+  color: var(--slate-700);
+}
+
+.description-text {
+  color: var(--slate-500);
+  font-size: 12px;
+}
+
+.lkr-text {
+  color: var(--slate-700);
+  font-size: 12px;
+  height: fit-content;
+  font-weight: 600;
+}
+
+.price-text {
+  color: var(--slate-700);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.price-line {
+  align-items: baseline;
 }
