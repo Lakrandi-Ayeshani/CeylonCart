@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { ITemCartValues, ItemValues } from '../types/type';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import React from 'react';
+import { ItemValues } from '../types/type';
+import { useAppDispatch } from '../store/hooks';
 import { quantityDecrement, quantityIncrement } from '../features/item/itemSlice';
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
-import { current } from '@reduxjs/toolkit';
 
 interface CartItemProps {
     cartItem: ItemValues,
@@ -13,21 +12,18 @@ interface CartItemProps {
 }
 
 const CartItem: React.FC<CartItemProps> = (props) => {
-    // const quantity = useAppSelector(state => state.item.quantity);
     const dispatch = useAppDispatch();
 
-    const currentTotalPrice = props.totalPrice;
-    // const [itemTotalPrice, setItemTotalPrice] = useState<number>(0);
-
-    const handleIncreaseQuantity = (index: number) => {
-        // const newTotalPrice = currentTotalPrice+ props.cartItem.price;
-        // props.setTotalPrice(newTotalPrice);
-        console.log(index);
-        dispatch(quantityIncrement(index));
+    const handleIncreaseQuantity = (id: number) => {
+        props.setTotalPrice(props.totalPrice + props.cartItem.price);
+        dispatch(quantityIncrement(id));
     }
 
-    const handleDecreaseQuantity = (index: number) => {
-        dispatch(quantityDecrement(index));
+    const handleDecreaseQuantity = (id: number) => {
+        if (props.cartItem.orderQuantity > 0) {
+            props.setTotalPrice(props.totalPrice - props.cartItem.price);
+            dispatch(quantityDecrement(id));
+        }
     }
 
   return (  
@@ -43,14 +39,14 @@ const CartItem: React.FC<CartItemProps> = (props) => {
             <div className='price-line'>
                 <button 
                     className='quantity-button p-1'
-                    onClick={() => handleDecreaseQuantity(props.index)}
+                    onClick={() => handleDecreaseQuantity(props.cartItem.id)}
                 >
                     <CiCircleMinus />
                 </button>
                 <span className='min-h-fit px-1'>{props.cartItem.orderQuantity}</span>
                 <button 
                     className='quantity-button'
-                    onClick={() => handleIncreaseQuantity(props.index)}
+                    onClick={() => handleIncreaseQuantity(props.cartItem.id)}
                 >
                     <CiCirclePlus />
                 </button>

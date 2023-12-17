@@ -3,10 +3,11 @@ import { MdAddShoppingCart } from "react-icons/md";
 import { ItemValues } from '../types/type';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { addToCart } from '../features/item/itemSlice';
-import { useSelector } from 'react-redux';
 
 interface ItemProps {
     item: ItemValues, 
+    totalPrice: number,
+    setTotalPrice: (index: number) => void,
 }
 
 const Item: React.FC<ItemProps> = (props) => {
@@ -17,6 +18,7 @@ const Item: React.FC<ItemProps> = (props) => {
         const isExisting = cartList.some(cartItem => cartItem.id === item.id)
         if(isExisting === false) {
             dispatch(addToCart(item));
+            props.setTotalPrice(props.totalPrice + props.item.price);
         }
     }
 

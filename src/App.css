@@ -96,3 +96,45 @@
 .price-line {
   align-items: baseline;
 }
+
+.with-cart { 
+  grid-template-columns: 
+    1fr;           /* grid-cols-1 */
+  /* screen size >= 640px */
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));  /* sm:grid-cols-2 */
+  }
+  /* screen size >= 768px */
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));  /* md:grid-cols-3 */
+  }
+  /* screen size >= 1024px */
+  @media (min-width: 1150px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));  /* lg:grid-cols-4 */
+  }
+  /* screen size >= 1280px */
+  @media (min-width: 1425px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));  /* xl:grid-cols-5 */
+  }
+}
+
+.without-cart { 
+    grid-template-columns: 
+      1fr;           /* grid-cols-1 */
+    /* screen size >= 640px */
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));  /* sm:grid-cols-2 */
+    }
+    /* screen size >= 768px */
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));  /* md:grid-cols-3 */
+    }
+    /* screen size >= 1024px */
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));  /* lg:grid-cols-4 */
+    }
+    /* screen size >= 1280px */
+    @media (min-width: 1280px) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));  /* xl:grid-cols-5 */
+    }
+}

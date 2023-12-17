@@ -1,19 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../../store/store';
-import { ITemCartValues, ItemValues } from '../../types/type';
-import CartItem from '../../components/CartItemCard';
+import { ItemValues } from '../../types/type';
 
 interface ItemState {
-    // value: number
     items: Array<ItemValues>
     cartItems: Array<ItemValues>
     // cartItems: Array<{item: ItemValues, quantity?: number }>
-    // quantity: number
-    // cartItems: Array<ItemValues & ITemCartValues>
 }
 
 const initialState: ItemState = {
-    // value: 0,
     items: [
         {
             id: 1,
@@ -73,7 +68,6 @@ const initialState: ItemState = {
         },
     ],
     cartItems: [],
-
 }
 
 export const itemSlice = createSlice({
@@ -81,7 +75,7 @@ export const itemSlice = createSlice({
     initialState, 
     reducers: {
         addToCart: (state, {payload}) => {
-            let changeItem = state.items.find(item => item.id === payload.id);
+            let changeItem = state.items.find((item) => item.id === payload.id);
             if (changeItem) {
                 changeItem = { ...changeItem };
                 changeItem.orderQuantity = 1;
@@ -89,12 +83,25 @@ export const itemSlice = createSlice({
             }
         },
         quantityIncrement: (state, {payload}) => {
-            state.cartItems[payload].orderQuantity += 1;
+            const newArray = state.cartItems.map((item) => {
+                if (item.id === payload) {
+                    item.orderQuantity += 1;
+                    return item
+                }
+                return item;
+            });
+            state.cartItems = newArray;        
         },
         quantityDecrement: (state, {payload}) => {
-            state.cartItems[payload].orderQuantity -= 1;
+            const newArray = state.cartItems.map((item) => {
+                if (item.id === payload) {
+                    item.orderQuantity -= 1;
+                    return item
+                }
+                return item;
+            });
+            state.cartItems = newArray;   
         },
-
     },
 })
 
